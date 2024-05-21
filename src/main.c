@@ -10,7 +10,7 @@ enum {
 SDL_Window  *window = NULL;
 SDL_Renderer *renderer = NULL;
 
-SDL_Rect fillRect = {SCREEN_WIDTH  / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH  / 2, SCREEN_HEIGHT / 2};
+SDL_Rect fillRect = {SCREEN_WIDTH  / 2, SCREEN_HEIGHT / 2, 32, 32};
 
 int main(int argc, char *argv[])
 {
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
   SDL_RenderFillRect(renderer, &fillRect);
   SDL_RenderPresent(renderer);
-  SDL_Delay(4000);
+  SDL_Delay(5000);
 
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);

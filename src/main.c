@@ -11,9 +11,9 @@ SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
 SDL_GameController* controller = NULL;
 
-SDL_Rect rectangle = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 64, 64};
+SDL_Rect rectangle = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 32, 32};
 
-const int SPEED = 5; // Lower speed for testing
+const int SPEED = 600; // Lower speed for testing
 
 // Exit the game and clean up
 void quitGame() {
@@ -35,23 +35,24 @@ void handleEvents() {
 }
 
 // Function to update rectangle movement
-void update() {
+void update(float deltaTime) {
+
     SDL_GameControllerUpdate();
 
     if (SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_UP) && rectangle.y > 0) {
-        rectangle.y -= SPEED;
+        rectangle.y -= SPEED * deltaTime;
     }
 
     if (SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN) && rectangle.y < SCREEN_HEIGHT - rectangle.h) {
-        rectangle.y += SPEED;
+        rectangle.y += SPEED * deltaTime;
     }
 
     if (SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT) && rectangle.x > 0) {
-        rectangle.x -= SPEED;
+        rectangle.x -= SPEED * deltaTime;
     }
 
     if (SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT) && rectangle.x < SCREEN_WIDTH - rectangle.w) {
-        rectangle.x += SPEED;
+        rectangle.x += SPEED * deltaTime;
     }
 }
 
@@ -96,10 +97,19 @@ int main(int argc, char *argv[])
         }
     }
 
+    Uint32 previousFrameTime = SDL_GetTicks();
+    Uint32 currentFrameTime;
+    float deltaTime;
+
     // Main loop
     while (1) {
+
+        currentFrameTime = SDL_GetTicks();
+        deltaTime = (currentFrameTime - previousFrameTime) / 1000.0f;
+        previousFrameTime = currentFrameTime;
+
         handleEvents();
-        update();
+        update(deltaTime);
         render();
     }
 

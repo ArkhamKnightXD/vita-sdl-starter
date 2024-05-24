@@ -16,7 +16,6 @@ SDL_Rect rectangle = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 32, 32};
 const int SPEED = 600; // Lower speed for testing
 const int FRAME_RATE = 60; // Desired frame rate (frames per second)
  
-
 // Exit the game and clean up
 void quitGame() {
     SDL_GameControllerClose(controller);

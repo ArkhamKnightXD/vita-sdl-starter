@@ -86,13 +86,13 @@ void capFrameRate(Uint32 frameStartTime) {
     }
 }
 
-int main(int argc, char *argv[])
+int main()
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0) {
         return -1;
     }
 
-    if ((window = SDL_CreateWindow("RedRectangle", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN)) == NULL) {
+    if ((window = SDL_CreateWindow("starter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN)) == NULL) {
         return -1;
     }
 
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
     float deltaTime;
 
     // Main loop
-    while (1) {
+    while (true) {
 
         currentFrameTime = SDL_GetTicks();
         deltaTime = (currentFrameTime - previousFrameTime) / 1000.0f;
@@ -130,5 +130,4 @@ int main(int argc, char *argv[])
     }
 
     quitGame();
-    return 0;
 }

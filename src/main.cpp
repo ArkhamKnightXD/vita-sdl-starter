@@ -14,7 +14,6 @@ SDL_GameController* controller = NULL;
 SDL_Rect rectangle = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 32, 32};
 
 const int SPEED = 600; // Lower speed for testing
-const int FRAME_RATE = 60; // Desired frame rate (frames per second)
  
 // Exit the game and clean up
 void quitGame() {
@@ -77,15 +76,6 @@ void render() {
     SDL_RenderPresent(renderer);
 }
 
-void capFrameRate(Uint32 frameStartTime) {
-
-    Uint32 frameTime = SDL_GetTicks() - frameStartTime;
-    
-    if (frameTime < 1000 / FRAME_RATE) {
-        SDL_Delay(1000 / FRAME_RATE - frameTime);
-    }
-}
-
 int main()
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0) {
@@ -125,8 +115,6 @@ int main()
         handleEvents();
         update(deltaTime);
         render();
-
-        capFrameRate(currentFrameTime);
     }
 
     quitGame();
